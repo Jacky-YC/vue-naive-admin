@@ -6,14 +6,16 @@
  * Copyright © 2023 Ronnie Zhang(大脸怪) | https://isme.top
  **********************************/
 
-import { request } from '@/utils'
+import {request} from '@/utils'
 
 export default {
-  create: (data) => request.post('/user', data),
-  read: (params = {}) => request.get('/user', { params }),
-  update: (data) => request.patch(`/user/${data.id}`, data),
-  delete: (id) => request.delete(`/user/${id}`),
-  resetPwd: (id, data) => request.patch(`/user/password/reset/${id}`, data),
+    create: (data) => request.post('/user', data),
+    read: (params = {}) => request.post('/user/page', {params}),
+    update: (data) => request.patch(`/user/${data.id}`, data),
+    delete: (id) => request.delete(`/user/${id}`),
+    resetPwd: (id, data) => request.patch(`/user/password/reset/${id}`, data),
 
-  getAllRoles: () => request.get('/role?enable=1'),
+    getAllRoles: () => request.post('/role/query', {
+        "enable": 1
+    }),
 }
