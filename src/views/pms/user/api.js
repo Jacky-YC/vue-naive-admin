@@ -10,7 +10,7 @@ import {request} from '@/utils'
 
 export default {
     create: (data) => request.post('/user', data),
-    read: (params = {}) => request.post('/user/page', {params}),
+    read: (param = {}) => request.post('/user/page', {...param}),
     update: (data) => request.patch(`/user/${data.id}`, data),
     delete: (id) => request.delete(`/user/${id}`),
     resetPwd: (id, data) => request.patch(`/user/password/reset/${id}`, data),
