@@ -103,7 +103,8 @@ async function handleQuery() {
     let paginationParams = {}
     // 如果非分页模式或者使用前端分页,则无需传分页参数
     if (props.isPagination && props.remote) {
-      paginationParams = { page: pagination.page, size: pagination.pageSize, model: {...props.queryItems} }
+      // 由于分页功能查询条件嵌套, 故冗余传参, 兼容模式两种接口模式
+      paginationParams = { page: pagination.page, size: pagination.pageSize, ...props.queryItems, model: {...props.queryItems} }
     }
     const { data } = await props.getData({
       ...paginationParams,
