@@ -11,7 +11,7 @@
     <div class="flex">
       <n-card class="min-w-200 w-30%">
         <div class="flex items-center">
-          <n-avatar round :size="60" :src="userStore.avatar" class="flex-shrink-0" />
+          <n-avatar round :size="60" :src="userStore.avatar" class="flex-shrink-0"/>
           <div class="ml-20 flex-col">
             <span class="text-20 opacity-80">
               Hello, {{ userStore.nickName ?? userStore.username }}
@@ -24,46 +24,57 @@
         <p class="mt-12 text-right text-12 opacity-40">—— 查尔斯·史考伯</p>
       </n-card>
       <n-card class="ml-12 w-70%" title="✨ 欢迎使用 Vue Naive Admin 2.0">
-        <template #header-extra>
-          <a
-            class="text-14 text-primary text-highlight hover:underline hover:opacity-80"
-            href="https://isme.top"
-            target="_blank"
-            @click.prevent="message?.info('官网正在火速开发中...')"
-          >
-            isme.top
-          </a>
-        </template>
+        <!--        <template #header-extra>-->
+        <!--          <a-->
+        <!--            class="text-14 text-primary text-highlight hover:underline hover:opacity-80"-->
+        <!--            href="https://isme.top"-->
+        <!--            target="_blank"-->
+        <!--            @click.prevent="message?.info('官网正在火速开发中...')"-->
+        <!--          >-->
+        <!--            isme.top-->
+        <!--          </a>-->
+        <!--        </template>-->
 
         <p class="opacity-60">
           这是一款极简风格的后台管理模板，包含前后端解决方案，前端使用 Vite + Vue3 + Pinia +
-          Unocss，后端使用 Nestjs + TypeOrm +
+          Unocss，后端使用 Kotlin + SpringBoot +
           MySql，简单易用，赏心悦目，历经十几次重构和细节打磨，诚意满满！！
         </p>
         <footer class="mt-12 flex items-center justify-end">
           <n-button
-            type="primary"
-            ghost
-            tag="a"
-            href="https://docs.isme.top/web/#/624306705/188522224"
-            target="__blank"
+              type="primary"
+              ghost
+              tag="a"
+              href="https://docs.isme.top/web/#/624306705/188522224"
+              target="__blank"
           >
             开发文档
           </n-button>
           <n-button
-            type="primary"
-            class="ml-12"
-            tag="a"
-            href="https://github.com/zclzone/vue-naive-admin/tree/2.x"
-            target="__blank"
+              type="primary"
+              class="ml-12"
+              tag="a"
+              href="https://github.com/Jacky-YC/ome-admin"
+              target="__blank"
           >
             代码仓库
           </n-button>
         </footer>
       </n-card>
     </div>
+
+    <div class="mt-12 flex h-400">
+      <n-card class="w-50%" title="🛠️ 前端技术栈" segmented>
+        <VChart :option="skillOption" autoresize/>
+      </n-card>
+
+      <n-card class="ml-12 w-50%" title="🛠️ 后端技术栈" segmented>
+        <VChart :option="backendSkillOption" autoresize/>
+      </n-card>
+    </div>
+
     <div class="mt-12 flex">
-      <n-card class="w-50%" title="💯 特性" segmented>
+      <n-card title="💯 特性" segmented>
         <template #header-extra>
           <span class="opacity-90 text-highlight">👏 历经十几次重构和细节打磨</span>
         </template>
@@ -141,17 +152,8 @@
           </p>
         </n-divider>
       </n-card>
-
-      <n-card class="ml-12 w-50%" title="🛠️ 技术栈" segmented>
-        <VChart :option="skillOption" autoresize />
-      </n-card>
     </div>
 
-    <n-card class="mt-12" title="⚡️ 趋势" segmented>
-      <div class="h-400">
-        <VChart :option="trendOption" autoresize />
-      </div>
-    </n-card>
   </AppPage>
 </template>
 
@@ -177,68 +179,10 @@ echarts.use([
   PieChart,
 ])
 
-const trendOption = {
-  tooltip: {
-    trigger: 'axis',
-    axisPointer: {
-      type: 'cross',
-      crossStyle: {
-        color: '#999',
-      },
-    },
-  },
-  legend: {
-    top: '5%',
-    data: ['star', 'fork'],
-  },
-  xAxis: [
-    {
-      type: 'category',
-      data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
-      axisPointer: {
-        type: 'shadow',
-      },
-    },
-  ],
-  yAxis: [
-    {
-      type: 'value',
-      min: 0,
-      max: 3000,
-      interval: 500,
-      axisLabel: {
-        formatter: '{value}',
-      },
-    },
-    {
-      type: 'value',
-      min: 0,
-      max: 500,
-      interval: 100,
-      axisLabel: {
-        formatter: '{value}',
-      },
-    },
-  ],
-  series: [
-    {
-      name: 'star',
-      type: 'line',
-      data: [200, 320, 520, 550, 600, 805, 888, 950, 1300, 2503, 2702, 2712],
-    },
-    {
-      name: 'fork',
-      yAxisIndex: 1,
-      type: 'bar',
-      data: [40, 72, 110, 115, 121, 175, 180, 201, 260, 398, 423, 455],
-    },
-  ],
-}
-
 const skillOption = {
   tooltip: {
     trigger: 'item',
-    formatter({ name, value }) {
+    formatter({name, value}) {
       return `${name} ${value}%`
     },
   },
@@ -271,15 +215,58 @@ const skillOption = {
         show: false,
       },
       data: [
-        { value: 38.5, name: 'Vue' },
-        { value: 37.0, name: 'JavaScript' },
-        { value: 6.5, name: 'CSS' },
-        { value: 6.2, name: 'HTML' },
-        { value: 1.8, name: 'Other' },
+        {value: 38.5, name: 'Vue'},
+        {value: 37.0, name: 'JavaScript'},
+        {value: 6.5, name: 'CSS'},
+        {value: 6.2, name: 'HTML'},
+        {value: 1.8, name: 'Other'},
+        {value: 1.8, name: 'Other'},
       ],
     },
   ],
 }
 
+const backendSkillOption = {
+  tooltip: {
+    trigger: 'item',
+    formatter({name, value}) {
+      return `${name} ${value}%`
+    },
+  },
+  legend: {
+    left: 'center',
+  },
+  series: [
+    {
+      top: '12%',
+      type: 'pie',
+      radius: ['35%', '90%'],
+      avoidLabelOverlap: true,
+      itemStyle: {
+        borderRadius: 10,
+        borderColor: '#fff',
+        borderWidth: 2,
+      },
+      label: {
+        show: false,
+        position: 'center',
+      },
+      emphasis: {
+        label: {
+          show: true,
+          fontSize: 36,
+          fontWeight: 'bold',
+        },
+      },
+      labelLine: {
+        show: false,
+      },
+      data: [
+        {value: 99.2, name: 'Kotlin'},
+        {value: 0.08, name: 'Other'},
+      ],
+    },
+  ],
+}
 const message = $message
 </script>

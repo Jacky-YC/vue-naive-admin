@@ -57,12 +57,7 @@ defineOptions({ name: 'ImgUpload' })
 
 const { copy, copied } = useClipboard()
 
-const imgList = reactive([
-  { url: 'https://cdn.isme.top/images/5c23d52f880511ebb6edd017c2d2eca2.jpg' },
-  { url: 'https://cdn.isme.top/images/5c23d52f880511ebb6edd017c2d2eca2.jpg' },
-  { url: 'https://cdn.isme.top/images/5c23d52f880511ebb6edd017c2d2eca2.jpg' },
-  { url: 'https://cdn.isme.top/images/5c23d52f880511ebb6edd017c2d2eca2.jpg' },
-])
+const imgList = reactive([])
 
 watch(copied, (val) => {
   val && $message.success('已复制到剪切板')
