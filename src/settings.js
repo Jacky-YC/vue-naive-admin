@@ -87,6 +87,16 @@ export const basePermissions = [
         enable: true,
         show: true,
       },
+      {
+        code: 'Github',
+        name: '代码仓库',
+        type: 'MENU',
+        path: 'https://github.com/Jacky-YC/ome-admin',
+        icon: 'i-fe:github',
+        order: 4,
+        enable: true,
+        show: true,
+      },
     ],
   },
 ]
